@@ -1,0 +1,27 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Transfer
+    network: mumbai
+    source:
+      address: "0xe749344593aF1C902A2fcc03B92E96f912b57747"
+      abi: Transfer
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ChangeNameEvent
+        - TranstringsferEvent
+      abis:
+        - name: Transfer
+          file: Transfer\abis\Transfer.json
+      eventHandlers:
+        - event: ChangeNameEvent(string)
+          handler: handleChangeNameEvent
+        - event: TranstringsferEvent(address,address,uint256)
+          handler: handleTranstringsferEvent
+      file: Transfer\Transfer.wasm
